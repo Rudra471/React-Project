@@ -1,4 +1,4 @@
-Gita Guidance 🕉️
+<h1>Gita Guidance 🕉️ </h1>
 Gita Guidance is a modern, AI-powered web application that provides wisdom and answers from the Bhagavad Gita. Ask any question, look up specific verses, or receive a personalized daily verse to guide you on your path.
 
 (Replace this placeholder with a screenshot of your running application!)
