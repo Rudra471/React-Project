@@ -216,15 +216,8 @@ export default function App() {
                 setError("The request took too long. Please check your connection and try again.");
             } else {
                 console.error("API Call failed:", err.message);
-                setError("Sorry, I couldn't retrieve wisdom at this moment. Please try again.");
+                setError("Sorry, I couldn't retrieve wisdom at this moment. Please check your API key and try again.");
             }
-            setAnswer({
-                chapter: 2, verse: 47,
-                sanskrit: "कर्मण्येवाधिकारस्ते मा फलेषु कदाचन।\nमा कर्मफलहेतुर्भूर्मा ते सङ्गोऽस्त्वकर्मणि॥",
-                transliteration: "karmaṇy-evādhikāras te mā phaleṣu kadācana...",
-                translation: "You have a right to perform your prescribed duties, but you are not entitled to the fruits of your actions.",
-                explanation: "This is a default verse displayed due to an error. It advises focusing on actions without attachment to outcomes, a key principle of Karma Yoga.",
-            });
         } finally {
             setIsLoading(false);
             setTimeout(() => { answerRef.current?.scrollIntoView({ behavior: 'smooth' }); }, 100);
@@ -243,6 +236,7 @@ export default function App() {
         e.preventDefault();
         if (!chapterInput || !verseInput) {
             setError("Please provide both chapter and verse.");
+            setAnswer(null); // Clear previous answer
             return;
         }
         const systemPrompt = `You are a wise spiritual guide deeply knowledgeable about the Bhagavad Gita. Your task is to provide the full details for a specific verse requested by the user. Respond ONLY with a valid JSON object that follows this exact schema: {"type": "OBJECT", "properties": {"chapter": {"type": "NUMBER"}, "verse": {"type": "NUMBER"}, "sanskrit": {"type": "STRING"}, "transliteration": {"type": "STRING"}, "translation": {"type": "STRING"}, "explanation": {"type": "STRING"}}, "required": ["chapter", "verse", "sanskrit", "transliteration", "translation", "explanation"]}. Provide a detailed explanation of the verse's meaning, context, and practical application. Do not include any text outside of the JSON object.`;
@@ -265,7 +259,7 @@ export default function App() {
                 <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                     <div className="flex items-center space-x-2"><img src="https://placehold.co/40x40/f97316/ffffff?text=ॐ" alt="Gita Icon" className="rounded-full" /><h1 className="text-xl font-bold tracking-tight">Gita Guidance</h1></div>
                     <div className="flex items-center space-x-4">
-                        <a href="https://share.google/0V2eO14FFBQ1ZvrtC" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors">
+                        <a href="https://www.gitapress.org/bhagavad-gita" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors">
                             <BookOpen size={20} /><span>Read Gita</span>
                         </a>
                         <button onClick={() => setShowJournal(true)} className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors"><Book size={20} /><span>Journal ({bookmarks.length})</span></button>
