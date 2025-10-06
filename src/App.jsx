@@ -65,7 +65,7 @@ const DailyVerse = ({ persona, onBookmark, bookmarks }) => {
             const apiKey = "AIzaSyC1JrhyMexDkY3vqUrVQeax9OcyM0AAcYE"; // PASTE YOUR API KEY HERE
             const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
             
-            const systemPrompt = `You are a wise spiritual guide deeply knowledgeable about the Bhagavad Gita. Your task is to provide an insightful daily verse. Respond ONLY with a valid JSON object that follows this exact schema: {"type": "OBJECT", "properties": {"chapter": {"type": "NUMBER"}, "verse": {"type": "NUMBER"}, "sanskrit": {"type": "STRING"}, "transliteration": {"type": "STRING"}, "translation": {"type": "STRING"}, "explanation": {"type": "STRING"}}, "required": ["chapter", "verse", "sanskrit", "transliteration", "translation", "explanation"]}. The 'explanation' should be inspiring and relevant for daily life. Do not include any text outside of the JSON object.`;
+            const systemPrompt = `You are a wise spiritual guide deeply knowledgeable about the Bhagavad Gita. Your task is to provide an insightful daily verse randomly from full geeta. Respond ONLY with a valid JSON object that follows this exact schema: {"type": "OBJECT", "properties": {"chapter": {"type": "NUMBER"}, "verse": {"type": "NUMBER"}, "sanskrit": {"type": "STRING"}, "transliteration": {"type": "STRING"}, "translation": {"type": "STRING"}, "explanation": {"type": "STRING"}}, "required": ["chapter", "verse", "sanskrit", "transliteration", "translation", "explanation"]}. The 'explanation' should be inspiring and relevant for daily life. Do not include any text outside of the JSON object.`;
             const userPrompt = `Please provide an inspiring verse from the Bhagavad Gita suitable for a ${persona}.`;
 
             const payload = {
@@ -227,7 +227,7 @@ export default function App() {
     const handleSearch = async (e) => {
         e.preventDefault();
         if (!query) return;
-        const systemPrompt = `You are a wise spiritual guide deeply knowledgeable about the Bhagavad Gita. A user is asking a question. Your task is to find the most relevant verse (sloka) from the Bhagavad Gita that addresses their query. Then, provide a detailed explanation. Respond ONLY with a valid JSON object that follows this exact schema: {"type": "OBJECT", "properties": {"chapter": {"type": "NUMBER"}, "verse": {"type": "NUMBER"}, "sanskrit": {"type": "STRING"}, "transliteration": {"type": "STRING"}, "translation": {"type": "STRING"}, "explanation": {"type": "STRING"}}, "required": ["chapter", "verse", "sanskrit", "transliteration", "translation", "explanation"]}. The 'explanation' should connect the verse to the user's question, offer practical wisdom, and maintain a compassionate, guiding tone. Do not include any text outside of the JSON object.`;
+        const systemPrompt = `You are a wise spiritual guide deeply knowledgeable about the Bhagavad Gita. A user is asking a question. Your task is to find the most relevant verse (sloka) from the Bhagavad Gita in both english and hindi and in two or three lines that addresses their query. Then, provide a detailed explanation. Respond ONLY with a valid JSON object that follows this exact schema: {"type": "OBJECT", "properties": {"chapter": {"type": "NUMBER"}, "verse": {"type": "NUMBER"}, "sanskrit": {"type": "STRING"}, "transliteration": {"type": "STRING"}, "translation": {"type": "STRING"}, "explanation": {"type": "STRING"}}, "required": ["chapter", "verse", "sanskrit", "transliteration", "translation", "explanation"]}. The 'explanation' should connect the verse to the user's question, offer practical wisdom, and maintain a compassionate, guiding tone. Do not include any text outside of the JSON object.`;
         const userPrompt = `User query: "${query}"`;
         callGeminiAPI(userPrompt, systemPrompt);
     };
@@ -259,7 +259,7 @@ export default function App() {
                 <div className="container mx-auto px-4 py-3 flex justify-between items-center">
                     <div className="flex items-center space-x-2"><img src="https://placehold.co/40x40/f97316/ffffff?text=ॐ" alt="Gita Icon" className="rounded-full" /><h1 className="text-xl font-bold tracking-tight">Gita Guidance</h1></div>
                     <div className="flex items-center space-x-4">
-                        <a href="https://www.gitapress.org/bhagavad-gita" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors">
+                        <a href="https://sanskritacademy.delhi.gov.in/sites/default/files/2022-09/final_geeta.pdf" target="_blank" rel="noopener noreferrer" className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors">
                             <BookOpen size={20} /><span>Read Gita</span>
                         </a>
                         <button onClick={() => setShowJournal(true)} className="flex items-center space-x-2 text-sm hover:text-amber-300 transition-colors"><Book size={20} /><span>Journal ({bookmarks.length})</span></button>
